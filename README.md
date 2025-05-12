@@ -40,6 +40,15 @@
 | content | TextField |||
 | image | ImageField |||
 
+*   ### Comment Model
+| name | type | key | others |
+|------|------|-----|--------|
+| id | BigAuto | Primary key ||
+| owner | CharField | Foreign Key | User, on_delete=models.CASCADE | 
+| post | CharField | Foreign Key | Post, on_delete=models.CASCADE |
+| created_at | DateTimeField || auto_now_add=True |
+| updated_at | DateTimeField || auto_now=True |
+| content | TextField|||
 
 ## Technologies
 -   Python
