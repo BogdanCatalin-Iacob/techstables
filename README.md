@@ -5,6 +5,10 @@
     -   [Database Schema](#database-schema)
     -   [User Model](#user-model)
     -   [Profile Model](#profile-model)
+    -   [Post Model](#post-model)
+    -   [Comment Model](#comment-model)
+    -   [Like Model](#like-model)
+    -   [Follower Model](#follower-model)
 * [Technologies](#technologies)
 
 ## Database
@@ -56,7 +60,15 @@
 |------|------|-----|--------|
 | id | BigAuto | Primary Key||
 | owner || Foreign Key | User, on_delete=models.CASCADE |
-| post || Foreign Key | Post, on_delete=models.CASCADE |
+| post || Foreign Key | Post, related_name='likes', on_delete=models.CASCADE |
+| created_at | DateTimeField || auto_now_add=True |
+
+*   ### Follower Model
+| name | type | key | others |
+|------|------|-----|--------|
+| id | BigAuto | Primary Key||
+| owner || Foreign Key | User, related_name='following', on_delete=models.CASCADE |
+| followed || Foreign Key | User, related_name='followed', on_delete=models.CASCADE |
 | created_at | DateTimeField || auto_now_add=True |
 
 ## Technologies
