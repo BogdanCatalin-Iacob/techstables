@@ -23,7 +23,7 @@
 | name | type | key | others |
 |------|------|-----|--------|
 | id | BigAuto | Primary Key ||
-| owner | OneToOneField | Foreign Key | User, on_delete= models.CASCADE |
+| owner | OneToOneField || User, on_delete= models.CASCADE |
 | created_at | DateTimeField || auto_now_add=True |
 | updated_at | DateTimeField || auto_now=True |
 | name | CharField || max_length=100, null=True, blacnk=True |
@@ -33,7 +33,7 @@
 | name | type | key | others |
 |------|------|-----|--------|
 | id | BigAuto | Primary Key||
-| owner | CharField | Foreign Key | User, on_delete=models.CASCADE |
+| owner || Foreign Key | User, on_delete=models.CASCADE |
 | created_at | DateTimeField || auto_now_add=True |
 | updated_at | DateTimeField || auto_now=True |
 | title | CharField || max_length=255 |
@@ -44,11 +44,20 @@
 | name | type | key | others |
 |------|------|-----|--------|
 | id | BigAuto | Primary key ||
-| owner | CharField | Foreign Key | User, on_delete=models.CASCADE | 
-| post | CharField | Foreign Key | Post, on_delete=models.CASCADE |
+| owner || Foreign Key | User, on_delete=models.CASCADE | 
+| post || Foreign Key | Post, on_delete=models.CASCADE |
 | created_at | DateTimeField || auto_now_add=True |
 | updated_at | DateTimeField || auto_now=True |
 | content | TextField|||
+
+
+*   ### Like Model
+| name | type | key | others |
+|------|------|-----|--------|
+| id | BigAuto | Primary Key||
+| owner || Foreign Key | User, on_delete=models.CASCADE |
+| post || Foreign Key | Post, on_delete=models.CASCADE |
+| created_at | DateTimeField || auto_now_add=True |
 
 ## Technologies
 -   Python
