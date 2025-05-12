@@ -29,6 +29,17 @@
 | name | CharField || max_length=100, null=True, blacnk=True |
 | image | ImageField || upload_to='images/', default='media/images default_profile_xdfle7' |
 
+*   ### Post Model
+| name | type | key | others |
+|------|------|-----|--------|
+| id | BigAuto | Primary Key||
+| owner | CharField | Foreign Key | User, on_delete=models.CASCADE |
+| created_at | DateTimeField || auto_now_add=True |
+| updated_at | DateTimeField || auto_now=True |
+| title | CharField || max_length=255 |
+| content | TextField |||
+| image | ImageField |||
+
 
 ## Technologies
 -   Python
