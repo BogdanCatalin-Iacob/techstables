@@ -42,7 +42,8 @@ class Profile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     image = models.ImageField(
-        upload_to='images/', default='media/images/default_profile_xdfle7')
+        upload_to='images/',
+        default='../default_profile_xdfle7')
 
     class Meta:
         ordering = ['-created_at']
