@@ -6,11 +6,10 @@ class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, unique=True)
     content = models.TextField()
-    category = models.CharField(max_length=255, default='technology')
     image = models.ImageField(
-        upload_to='images/', blank=True
+        upload_to='images/', blank=True, null=True
     )
 
     class Meta:
