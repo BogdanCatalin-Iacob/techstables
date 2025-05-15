@@ -12,11 +12,12 @@ class ProfileListTests(APITestCase):
         User.objects.create_user(username='user2', password='pass2')
 
     def test_can_list_all_profiles(self):
-        response = self.client.get('/profiles/')
-        view = ProfileList()
-        queryset = view.get_queryset()
+        factory = APIRequestFactory()
+        request = factory.get('/profiles/')
+        view = ProfileList.as_view()
+        response = view(request)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(queryset.count(), 2)
+        self.assertEqual(response.data['count'], 2)
 
 
 class ProfileDetailTests(APITestCase):
