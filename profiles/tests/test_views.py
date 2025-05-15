@@ -50,3 +50,13 @@ class ProfileDetailTests(APITestCase):
         response = view(request, pk=9999)
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_profile_list_with_empty_database(self):
+        Profile.objects.all().delete()
+        view = ProfileList.as_view()
+        request = APIRequestFactory().get('/profiles/')
+        response = view(request)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data['results']), 0)
+        self.assertEqual(response.data['results'], [])
