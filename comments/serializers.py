@@ -35,3 +35,13 @@ class CommentSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
             'post', 'created_at', 'updated_at', 'content'
         ]
+
+
+class CommentDetailSerializer(CommentSerializer):
+    '''
+    Extends CommentSerializer to include additional details for a comment.
+
+    Attributes:
+        post (ReadOnlyField): The ID of the post associated with the comment.
+    '''
+    post = serializers.ReadOnlyField(source='post.id')
