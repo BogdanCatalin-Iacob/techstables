@@ -22,6 +22,18 @@ class PostList(generics.ListCreateAPIView):
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    '''
+    API view for retrieving, updating, or deleting a Post instance.
+
+    This view allows users to retrieve, update, or delete a specific post
+    instance. It uses the PostSerializer for serialization and enforces
+    permissions such that only the owner of the post can modify or delete it.
+
+    Attributes:
+        serializer_class (PostSerializer): The serializer class used for the Post model.
+        permission_classes (list): List containing the permission class IsOwnerOrReadOnly.
+        queryset (QuerySet): The queryset used to retrieve Post instances.
+    '''
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Post.objects.all()
