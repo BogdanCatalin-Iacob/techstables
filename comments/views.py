@@ -1,6 +1,7 @@
 from rest_framework import generics, permissions
+from techstables_backend.permissions import IsOwnerOrReadOnly
 from .models import Comment
-from .serializers import CommentSerializer
+from .serializers import CommentSerializer, CommentDetailSerializer
 
 
 class CommentList(generics.ListCreateAPIView):
@@ -26,3 +27,15 @@ class CommentList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         return serializer.save(owner=self.request.user)
+
+
+class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    '''
+    API view for retrieving, updating, or deleting a comment instance.
+
+    Uses CommentDetailSerializer for serialization and IsOwnerOrReadOnly
+    for permission control. Operates on the Comment model.
+    '''
+    serializer_class = CommentDetailSerializer
+    permission_classes = [IsOwnerOrReadOnly]
+    queryset = Comment.objects.all()
