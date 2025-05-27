@@ -1,5 +1,6 @@
 from django.db.models import Count
 from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from techstables_backend.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
@@ -7,22 +8,18 @@ from .serializers import ProfileSerializer
 
 class ProfileList(generics.ListAPIView):
     '''
-    API view to list all Profile instances with annotated counts.
-
-    This view provides a list of all Profile instances, annotated with
-    counts for posts, followers, and following relationships. The
-    ProfileSerializer is used to convert Profile model instances into
-    JSON format for API responses. Supports ordering by various fields
-    including posts count, followers count, and following count.
+    API view for listing profiles with annotated counts for posts, followers,
+    and following. Supports ordering and filtering based on specified fields.
 
     Attributes:
-        queryset (QuerySet): Annotated Profile instances ordered by
-            creation date.
-        serializer_class (ProfileSerializer): Serializer class for
-            Profile instances.
-        filter_backends (list): List of filter backends for ordering.
-        ordering_fields (list): Fields available for ordering the
-            results.
+        queryset (QuerySet): Annotated queryset of profiles
+            ordered by creation date.
+        serializer_class (ProfileSerializer):
+            Serializer class for profile data.
+        filter_backends (list): List of filter backends for ordering
+            and filtering.
+        filterset_fields (list): Fields available for filtering profiles.
+        ordering_fields (list): Fields available for ordering profiles.
     '''
     queryset = Profile.objects.annotate(
         posts_count=Count('owner__post', distinct=True),
@@ -31,7 +28,11 @@ class ProfileList(generics.ListAPIView):
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
     filter_backends = [
-        filters.OrderingFilter
+        filters.OrderingFilter,
+        DjangoFilterBackend
+    ]
+    filterset_fields = [
+        'owner__following__followed__profile'
     ]
     ordering_fields = [
         'posts_count',
