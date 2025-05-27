@@ -16,6 +16,9 @@ class ProfileSerializer(serializers.ModelSerializer):
             user is the owner of the profile.
         following_id (SerializerMethodField): The ID of the follower
             relationship if the requesting user follows the profile owner.
+        posts_count (ReadOnlyField): The number of posts created by user.
+        followers_count (ReadOnlyField): The number of followers a user has.
+        following_count (ReadOnlyField): The number of users followed by user.
 
     Methods:
         get_is_owner(obj): Checks if the requesting user is the owner
@@ -30,6 +33,9 @@ class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     following_id = serializers.SerializerMethodField()
+    posts_count = serializers.ReadOnlyField()
+    followers_count = serializers.ReadOnlyField()
+    following_count = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         '''
@@ -80,5 +86,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = [
             'id', 'owner', 'created_at', 'updated_at',
-            'name', 'image', 'is_owner', 'following_id'
+            'name', 'image', 'is_owner', 'following_id',
+            'posts_count', 'followers_count', 'following_count'
         ]
