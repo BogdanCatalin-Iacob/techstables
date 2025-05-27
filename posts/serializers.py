@@ -5,46 +5,49 @@ from likes.models import Like
 
 class PostSerializer(serializers.ModelSerializer):
     '''
-    Serializer for the Post model, handling serialization and validation
-    of post data. It includes fields for owner details, timestamps, and
-    content, and provides methods to verify if the current user is the
-    post owner and to retrieve the like ID for the post. The serializer
-    also validates the image size and dimensions.
+    Serializer for the Post model, including additional fields for user-related
+    information and post statistics.
 
     Attributes:
         owner (ReadOnlyField): The username of the post owner.
         profile_id (ReadOnlyField): The ID of the owner's profile.
         profile_image (ReadOnlyField): The URL of the owner's profile image.
-        is_owner (SerializerMethodField): Indicates if the current user
-            is the owner of the post.
+        is_owner (SerializerMethodField): Indicates if the requesting user
+            is the post owner.
         like_id (SerializerMethodField): The ID of the like by the current
-            user on the post, if it exists.
+            user on the post.
+        comments_count (ReadOnlyField): The number of comments on the post.
+        likes_count (ReadOnlyField): The number of likes on the post.
 
     Methods:
-        validate_image(value): Validates the size and dimensions of the image.
-        get_is_owner(obj): Determines if the current user is the owner of the post.
-        get_like_id(obj): Retrieves the like ID for the post by the current user.
+        validate_image: Validates the image size and dimensions.
+        get_is_owner: Checks if the requesting user is the owner of the post.
+        get_like_id: Retrieves the like ID for the current user and post.
 
     Meta:
-        model (Model): The Post model.
-        fields (list): List of fields to be serialized.
+        model: The Post model.
+        fields: The fields to be serialized.
     '''
     owner = serializers.ReadOnlyField(source='owner.username')
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     is_owner = serializers.SerializerMethodField()
     like_id = serializers.SerializerMethodField()
+    comments_count = serializers.ReadOnlyField()
+    likes_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
         '''
-        Validates the uploaded image to ensure it meets size and dimension constraints.
+        Validates the uploaded image to ensure it meets size and
+        dimension constraints.
 
         Args:
             value: The image file to be validated.
 
         Raises:
-            serializers.ValidationError: If the image exceeds the maximum allowed size
-            of 2MB, or if its height or width exceeds 4096 pixels.
+            serializers.ValidationError: If the image exceeds
+            the maximum allowed size of 2MB,
+            or if its height or width exceeds 4096 pixels.
         '''
         if not value:
             return
@@ -99,14 +102,18 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         '''
-        Metadata options for the Post serializer.
+        Meta class for the Post serializer, defining the model
+        and fields to be serialized.
 
         Attributes:
-            model (Model): Specifies the model that the serializer is associated with, in this case, the Post model.
-            fields (list): A list of fields that should be included in the serialized output. This includes:
+            model (Model): The model class that the serializer is based on,
+                in this case, the Post model.
+            fields (list): A list of field names to be included
+                in the serialized output. This includes:
                 - 'id': The unique identifier for the post.
-                - 'owner': The user who created the post.
-                - 'is_owner': A boolean indicating if the current user is the owner of the post.
+                - 'owner': The username of the post owner.
+                - 'is_owner': A boolean indicating if the current user
+                    is the owner of the post.
                 - 'profile_id': The ID of the owner's profile.
                 - 'profile_image': The URL of the owner's profile image.
                 - 'created_at': The timestamp when the post was created.
@@ -114,11 +121,14 @@ class PostSerializer(serializers.ModelSerializer):
                 - 'title': The title of the post.
                 - 'content': The content of the post.
                 - 'image': The image associated with the post.
-                - 'like_id': The ID of the like by the current user on the post, if it exists.
+                - 'like_id': The ID of the like by the current user
+                    on the post.
+                - 'comments_count': The number of comments on the post.
+                - 'likes_count': The number of likes on the post.
         '''
         model = Post
         fields = [
             'id', 'owner', 'is_owner', 'profile_id', 'profile_image',
             'created_at', 'updated_at', 'title', 'content', 'image',
-            'like_id'
+            'like_id', 'comments_count', 'likes_count'
         ]
