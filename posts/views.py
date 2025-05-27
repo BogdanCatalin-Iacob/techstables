@@ -37,7 +37,7 @@ class PostList(generics.ListCreateAPIView):
         filters.OrderingFilter
     ]
     ordering_fields = [
-        'commnets__count',
+        'comments__count',
         'likes__count',
         'likes__created_at'
     ]
