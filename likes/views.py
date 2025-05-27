@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from techstables_backend.permissions import IsOwnerOrReadOnly
 from .models import Like
 from .serializers import LikeSerializer
 
@@ -28,3 +29,26 @@ class LikeList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class LikeDetail(generics.RetrieveDestroyAPIView):
+    '''
+    API view for retrieving and deleting a Like instance.
+
+    This view allows users to retrieve details of a specific Like
+    instance or delete it if they are the owner. It uses the
+    IsOwnerOrReadOnly permission to ensure that only the owner
+    can delete the Like.
+
+    Attributes:
+        permission_classes (list): Specifies the permission class
+            to check if the user is the owner or if the request
+            method is safe.
+        serializer_class (LikeSerializer): The serializer class
+            used to serialize and validate Like instances.
+        queryset (QuerySet): The queryset that retrieves all Like
+            instances from the database.
+    '''
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = LikeSerializer
+    queryset = Like.objects.all()
