@@ -10,23 +10,26 @@ class PostList(generics.ListCreateAPIView):
     '''
     API view for listing and creating Post instances.
 
-    This view allows authenticated users to create new posts and
-    provides a list of existing posts. Posts are annotated with
-    the count of comments and likes, and can be ordered by these
-    counts or the creation date of likes.
+    This view supports filtering, searching, and ordering of posts based on
+    various fields such as comments count, likes count, and creation date.
+    Authenticated users can create new posts, while read-only access is
+    granted to unauthenticated users.
 
     Attributes:
         serializer_class (PostSerializer): The serializer class used for
-            validating and serializing post data.
+            serializing Post instances.
         permission_classes (list): Permissions required to access the view.
-        queryset (QuerySet): The base queryset for retrieving posts, annotated
-            with comment and like counts.
-        filter_backends (list): Filters applied to the queryset.
-        ordering_fields (list): Fields available for ordering the queryset.
+        queryset (QuerySet): The base queryset for retrieving Post instances,
+            annotated with comments and likes counts.
+        filter_backends (list): The list of filter backends used for
+            filtering, searching, and ordering.
+        ordering_fields (list): Fields available for ordering the results.
+        filterset_fields (list): Fields available for filtering the results.
+        search_fields (list): Fields available for searching the results.
 
     Methods:
-        perform_create(serializer): Saves a new post instance with the
-            current user as the owner.
+        perform_create: Saves a new Post instance with the current user as
+            the owner.
     '''
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
