@@ -71,7 +71,20 @@ SITE_ID = 1
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': [(
+        'rest_framework.authentication.SessionAuthentication'
+        if 'DEV' in os.environ
+        else 'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
+    )]
+}
+
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_SECURE': True,
+    'JWT_AUTH_COOKIE': 'techstables_auth',
+    'JWT_AUTH_REFRESH_COOKIE': 'techstables_refresh',
+    'USER_DETAILS_SERIALIZER': 'techstables_backend.serializers.CurrentUserSerializer'
 }
 
 MIDDLEWARE = [
