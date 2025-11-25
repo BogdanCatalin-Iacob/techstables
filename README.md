@@ -187,6 +187,47 @@ This API powers the Techstables app, enablig users to:
             }
         ```
 
+    - #### Comments
+        - ##### Comments Endpoints
+        Retrieve all comments: `GET` `/comments`
+        Retrieve specific comment: `GET` `/comments<int:pk>`
+
+        Create a comment: `POST` `/comments`
+        Update a comment: `POST` `/comments/<int:pk>`
+        
+        Delete a comment: `POST` `/comments/<int:pk>`
+
+        - ##### Comments Response Example
+
+        **Retrieve comments**
+        ```
+            {
+                "count": 1,
+                "next": null,
+                "previous": null,
+                "results": [
+                    {
+                        "id": 2,
+                        "owner": "username",
+                        "is_owner": true,
+                        "profile_id": 3,
+                        "profile_image": "image.url",
+                        "post": 2,
+                        "created_at": "5 months, 2 weeks ago",
+                        "updated_at": "5 months, 2 weeks ago",
+                        "content": "comment content"
+                    }
+                ]
+            }
+        ```
+
+        **Create / Update comment - inputs**
+        ```
+            {
+                "content": "comment content"
+            }
+
+        ```
 
 
 
