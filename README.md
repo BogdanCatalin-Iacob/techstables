@@ -229,6 +229,41 @@ This API powers the Techstables app, enablig users to:
 
         ```
 
+    - #### Followers
+        - ##### Followers Endpoints
+        Retrieve all followers: `GET` `/followers`
+        Retrieve a specific follower: `GET` `/followers<int:pk>`
+
+        Create follower: `POST` `/followers`
+        Update follower: `POST` `/followers/<int:pk>`
+
+        Delete follower: `POST` `/followers/<int:pk>`
+
+        - ##### Followers Response Example
+        **Retrieve followers**
+        ```
+            {
+                "count": 2,
+                "next": null,
+                "previous": null,
+                "results": [
+                    {
+                        "id": 2,
+                        "owner": "username",
+                        "created_at": "27 May 2025",
+                        "followed": 11,
+                        "followed_name": "username_1"
+                    },
+                    {
+                        "id": 1,
+                        "owner": "username_3",
+                        "created_at": "27 May 2025",
+                        "followed": 9,
+                        "followed_name": "username_5"
+                    }
+                ]
+            }
+        ```
 
 
 ## Database
