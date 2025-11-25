@@ -69,6 +69,11 @@ This API powers the Techstables app, enablig users to:
 * ### Base URL
 -   https://techstables-2157aa5076c9.herokuapp.com
 
+* ### Endpoints
+    - #### Profiles
+    GET `/profiles`
+    GET `/profiles/<int:pk>`
+
 
 
 ## Database
