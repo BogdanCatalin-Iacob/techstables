@@ -111,7 +111,12 @@ This API powers the Techstables app, enablig users to:
         -   ##### Posts endpoints
         Retrieve all posts: `GET` `/posts`
         Retrieve all posts: `GET` `/posts/<int:pk>`
-        
+
+        Create a post: `POST` `/posts`
+        Update a post: `POST` `/posts/<int:pk>`
+
+        Delete a post: `DELETE` `posts/<int:pk>`
+
 
         -   ##### Posts Response Example
         **Retrieve posts**
@@ -137,6 +142,15 @@ This API powers the Techstables app, enablig users to:
                     "likes_count": 1
                 }
             ]
+        }
+        ```
+
+        **Create / update a post - imputs**
+        ```
+        {
+            "title": "New Post",
+            "content": "This is my new post",
+            "images": "image file"
         }
         ```
 
