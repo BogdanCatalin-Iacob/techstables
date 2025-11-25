@@ -15,6 +15,12 @@
         -   [Likes](#likes)
             -   [Likes Endpoints](#likes-endpoints)
             -   [Likes Response Example](#likes-response-example)
+        -   [Comments](#comments)
+            -   [Comments Endpoints](#comments-endpoints)
+            -   [Comments Response Example](#comments-response-example)
+        -   [Followers](#followers)
+            -   [Followers Endpoints](#followers-endpoints)
+            -   [Followers Response Example](#followers-response-example)
 
 * [Database](#database)
     -   [Database Schema](#database-schema)
