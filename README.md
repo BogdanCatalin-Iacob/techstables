@@ -2,6 +2,7 @@
 
 ## Table of contents
 * [User stories](#user-stories)
+* [API endpoints](#api-endpoints)
 * [Database](#database)
     -   [Database Schema](#database-schema)
     -   [User Model](#user-model)
@@ -54,19 +55,30 @@ As a **(role)** I can **(capability)**, so that **(received benefit)**
 | 29 | Profile Owner | Logged in user can edit own profile | Change profile picture and bio |
 | 30 | Profile Owner | Logged in user can update username and password | Change my display name and keep my profile secure |
 
+## API endpoints
+* ### API overview
+This API powers the Techstables app, enablig users to:
+-   Retrieve all profiles or a specific profile
+-   Create, retrieve, update, delet posts
+-   Manage followers
+-   Add and view comments of posts
+-   Like and unlike posts
+
+
+
 ## Database
 
 * ### Database schema
 ![Database schema](assets/images/db_diagram.svg)
 
-*   ### User Model 
+*   #### User Model 
 | name | type | key | others |
 |------|------|-----|--------|
 | id | BigAuto | Primary Key|| 
 | username | CharField |||
 | password | Charfield ||| 
 
-*   ### Profile Model
+*   #### Profile Model
 | name | type | key | others |
 |------|------|-----|--------|
 | id | BigAuto | Primary Key ||
@@ -76,7 +88,7 @@ As a **(role)** I can **(capability)**, so that **(received benefit)**
 | name | CharField || max_length=100, null=True, blacnk=True |
 | image | ImageField || upload_to='images/', default='media/images default_profile_xdfle7' |
 
-*   ### Post Model
+*   #### Post Model
 | name | type | key | others |
 |------|------|-----|--------|
 | id | BigAuto | Primary Key||
@@ -87,7 +99,7 @@ As a **(role)** I can **(capability)**, so that **(received benefit)**
 | content | TextField |||
 | image | ImageField |||
 
-*   ### Comment Model
+*   #### Comment Model
 | name | type | key | others |
 |------|------|-----|--------|
 | id | BigAuto | Primary key ||
@@ -98,7 +110,7 @@ As a **(role)** I can **(capability)**, so that **(received benefit)**
 | content | TextField|||
 
 
-*   ### Like Model
+*   #### Like Model
 | name | type | key | others |
 |------|------|-----|--------|
 | id | BigAuto | Primary Key||
@@ -106,7 +118,7 @@ As a **(role)** I can **(capability)**, so that **(received benefit)**
 | post || Foreign Key | Post, related_name='likes', on_delete=models.CASCADE |
 | created_at | DateTimeField || auto_now_add=True |
 
-*   ### Follower Model
+*   #### Follower Model
 | name | type | key | others |
 |------|------|-----|--------|
 | id | BigAuto | Primary Key||
