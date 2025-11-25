@@ -5,7 +5,14 @@
 * [API endpoints](#api-endpoints)
     -   [Api overview](#api-overview)
     -   [Base URL](#base-url)
-        -   [Profiles Response example](#profiles-response-example)
+    -   [Endpoints](#endpoints)
+        -   [Profiles](#profiles)
+            -   [Profiles Endpoints](#profiles-endpoints)
+            -   [Profiles Response example](#profiles-response-example)
+        -   [Posts](#posts)
+            -   [Posts Endpoints](#posts-endpoints)
+            -   [Posts Response Example](#posts-response-example)
+
 * [Database](#database)
     -   [Database Schema](#database-schema)
     -   [User Model](#user-model)
@@ -72,32 +79,66 @@ This API powers the Techstables app, enablig users to:
 
 * ### Endpoints
     - #### Profiles
-    Retrieve all profiles: `GET` `/profiles` <br>
-    Retrieve a single profile: `GET` `/profiles/<int:pk>`
+        - ##### Profiles Endpoints
+        Retrieve all profiles: `GET` `/profiles` <br>
+        Retrieve a single profile: `GET` `/profiles/<int:pk>`
 
-    - #### Profiles Response Example
-    ```
-    {
-        "count": 4,
-        "next": null,
-        "previous": null,
-        "results": [
-            {
-                "id": 11,
-                "owner": "usernae",
-                "created_at": "14 May 2025",
-                "updated_at": "14 May 2025",
-                "name": null,
-                "image": "image.url",
-                "is_owner": false,
-                "following_id": 2,
-                "posts_count": 0,
-                "followers_count": 1,
-                "following_count": 0
-            }
-        ]
-    }
-    ```
+        - ##### Profiles Response Example
+        ```
+        {
+            "count": 4,
+            "next": null,
+            "previous": null,
+            "results": [
+                {
+                    "id": 11,
+                    "owner": "username",
+                    "created_at": "14 May 2025",
+                    "updated_at": "14 May 2025",
+                    "name": null,
+                    "image": "image.url",
+                    "is_owner": false,
+                    "following_id": 2,
+                    "posts_count": 0,
+                    "followers_count": 1,
+                    "following_count": 0
+                }
+            ]
+        }
+        ```
+
+    - #### Posts
+        -   ##### Posts endpoints
+        Retrieve all posts: `GET` `/posts`
+        Retrieve all posts: `GET` `/posts/<int:pk>`
+        
+
+        -   ##### Posts Response Example
+        **Retrieve posts**
+        ```
+        {
+            "count": 1,
+            "next": null,
+            "previous": null,
+            "results": [
+                {
+                    "id": 2,
+                    "owner": "username",
+                    "is_owner": true,
+                    "profile_id": 3,
+                    "profile_image": "image.url",
+                    "created_at": "21 May 2025",
+                    "updated_at": "21 May 2025",
+                    "title": "post title",
+                    "content": "posts content",
+                    "image": null,
+                    "like_id": 2,
+                    "comments_count": 1,
+                    "likes_count": 1
+                }
+            ]
+        }
+        ```
 
 
 
