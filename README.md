@@ -12,6 +12,9 @@
         -   [Posts](#posts)
             -   [Posts Endpoints](#posts-endpoints)
             -   [Posts Response Example](#posts-response-example)
+        -   [Likes](#likes)
+            -   [Likes Endpoints](#likes-endpoints)
+            -   [Likes Response Example](#likes-response-example)
 
 * [Database](#database)
     -   [Database Schema](#database-schema)
@@ -110,7 +113,7 @@ This API powers the Techstables app, enablig users to:
     - #### Posts
         -   ##### Posts endpoints
         Retrieve all posts: `GET` `/posts`
-        Retrieve all posts: `GET` `/posts/<int:pk>`
+        Retrieve specific post: `GET` `/posts/<int:pk>`
 
         Create a post: `POST` `/posts`
         Update a post: `POST` `/posts/<int:pk>`
@@ -145,7 +148,7 @@ This API powers the Techstables app, enablig users to:
         }
         ```
 
-        **Create / update a post - imputs**
+        **Create / update a post - inputs**
         ```
         {
             "title": "New Post",
@@ -153,6 +156,37 @@ This API powers the Techstables app, enablig users to:
             "images": "image file"
         }
         ```
+
+    - #### Likes
+        - ##### Likes endpoints
+        Retireve / Create likes: `GET` `/likes`
+        Retireve / Delete specific like: `GET` `/likes/<int:pk>`
+
+        - ##### Likes Response Example
+        **Retrieve likes**
+        ```
+            {
+                "count": 1,
+                "next": null,
+                "previous": null,
+                "results": [
+                    {
+                        "id": 2,
+                        "created_at": "27 May 2025",
+                        "owner": "username",
+                        "post": 2
+                    }
+                ]
+            }
+        ```
+
+        **Create like for a post - inputs**
+        ```
+            {
+                "post": "post_id"
+            }
+        ```
+
 
 
 
