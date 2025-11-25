@@ -5,6 +5,7 @@
 * [API endpoints](#api-endpoints)
     -   [Api overview](#api-overview)
     -   [Base URL](#base-url)
+        -   [Profiles Response example](#profiles-response-example)
 * [Database](#database)
     -   [Database Schema](#database-schema)
     -   [User Model](#user-model)
@@ -71,8 +72,32 @@ This API powers the Techstables app, enablig users to:
 
 * ### Endpoints
     - #### Profiles
-    GET `/profiles`
-    GET `/profiles/<int:pk>`
+    Retrieve all profiles: `GET` `/profiles` <br>
+    Retrieve a single profile: `GET` `/profiles/<int:pk>`
+
+    - #### Profiles Response Example
+    ```
+    {
+        "count": 4,
+        "next": null,
+        "previous": null,
+        "results": [
+            {
+                "id": 11,
+                "owner": "usernae",
+                "created_at": "14 May 2025",
+                "updated_at": "14 May 2025",
+                "name": null,
+                "image": "image.url",
+                "is_owner": false,
+                "following_id": 2,
+                "posts_count": 0,
+                "followers_count": 1,
+                "following_count": 0
+            }
+        ]
+    }
+    ```
 
 
 
