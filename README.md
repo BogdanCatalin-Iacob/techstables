@@ -3,6 +3,8 @@
 ## Table of contents
 * [User stories](#user-stories)
 * [API endpoints](#api-endpoints)
+    -   [Api overview](#api-overview)
+    -   [Base URL](#base-url)
 * [Database](#database)
     -   [Database Schema](#database-schema)
     -   [User Model](#user-model)
@@ -63,6 +65,9 @@ This API powers the Techstables app, enablig users to:
 -   Manage followers
 -   Add and view comments of posts
 -   Like and unlike posts
+
+* ### Base URL
+-   https://techstables-2157aa5076c9.herokuapp.com
 
 
 
