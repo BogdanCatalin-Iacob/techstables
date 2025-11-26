@@ -31,6 +31,9 @@
     -   [Like Model](#like-model)
     -   [Follower Model](#follower-model)
 * [Technologies](#technologies)
+* [Deployment](#deployment)
+    -   [Local Development](#local-development)
+        -   [Making a clone](#making-a-clone)
 
 ## User Stories
 
@@ -337,3 +340,16 @@ This API powers the Techstables app, enablig users to:
 -   Django
 -   [Cloudinary](https://cloudinary.com) -> for images storage
 -   [DBDiagram](https://dbdiagram.io) -> create db diagram
+
+## Deployment
+*   ### Local Development
+    * #### Making a clone
+    - Login to Github and locate the [Github Repository](https://github.com/BogdanCatalin-Iacob/techstables)
+    - Click the `<>Code` button and then choose a preffered cloning method.
+    - To clone repository using "HTTPS", copy the link under the "HTTPS" tab.
+    You can, also, choose to open with "Github Desktop", or download the zip file.
+    - Open the terminal on you computer.
+    - Navigate to the location here you would like the clone to be created.
+    - Type `git clone`, and then paste the URL you copied.
+    (```$ git clone https://github.com/BogdanCatalin-Iacob/techstables.git```)
+    - Press `ENTER` on keyboard to create the clone of the repository.
