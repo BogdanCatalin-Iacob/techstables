@@ -34,6 +34,7 @@
 * [Deployment](#deployment)
     -   [Local Development](#local-development)
         -   [Making a clone](#making-a-clone)
+        -   [Forking the Github Repository](#forking-the-github-repository)
 
 ## User Stories
 
@@ -344,12 +345,50 @@ This API powers the Techstables app, enablig users to:
 ## Deployment
 *   ### Local Development
     * #### Making a clone
-    - Login to Github and locate the [Github Repository](https://github.com/BogdanCatalin-Iacob/techstables)
-    - Click the `<>Code` button and then choose a preffered cloning method.
-    - To clone repository using "HTTPS", copy the link under the "HTTPS" tab.
+    1. Login to Github and locate the [Github Repository](https://github.com/BogdanCatalin-Iacob/techstables)
+    2. Click the `<>Code` button and then choose a preffered cloning method.
+    3. To clone repository using "HTTPS", copy the link under the "HTTPS" tab.
     You can, also, choose to open with "Github Desktop", or download the zip file.
-    - Open the terminal on you computer.
-    - Navigate to the location here you would like the clone to be created.
-    - Type `git clone`, and then paste the URL you copied.
+    4. Open the terminal on you computer.
+    5. Navigate to the location here you would like the clone to be created.
+    6. Type `git clone`, and then paste the URL you copied.
     (```$ git clone https://github.com/BogdanCatalin-Iacob/techstables.git```)
-    - Press `ENTER` on keyboard to create the clone of the repository.
+    7. Press `ENTER` on keyboard to create the clone of the repository.
+
+    * #### Forking the Github Repository
+    1. Login to Github and locate the [Github Repository](https://github.com/BogdanCatalin-Iacob/techstables)
+    2. Create an 'env.py' file (or any other env file). It needs to contain the following:
+        - DATABASE_URL = this can be obtained from the database host of your choice
+        - SECRET_KEY - This can be anything you like or use [django secret key generator](https://djecrety.ir/)
+        - CLOUDINARY_URL - This can be obtained from [Cloudinary](https://cloudinary.com) after you create an account
+        - DEV - This is used for development environment only (set it to "1")
+
+        If 'env.py' file is used, it shoul look like this:
+        ```
+        import os
+        os.environ["DATABASE_URL"] = 'postgres://xxxxxxxxxxxxxxxxxxxxxxxx'
+        os.environ["SECRET_KEY"] = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        os.environ["Cloudinary_URL"] = 'cloudinary://xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        os.environ["DEV] = '1'
+        ```
+    
+    3. Install app requirements:
+        ```
+        $ pip install -r requirements.txt
+        ```
+    
+    4. Migrate the database models to the chosen db:
+        ```
+        $ python manage.py makemigrations
+        $ python manage.py migrate
+        ```
+    
+    5. Create super user and follow instructions:
+        ```
+        $ python manage.py createsuperuser
+        ```
+    
+    6. Run the app locally:
+     ```
+     $ python manage.py runserver
+     ```
