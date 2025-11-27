@@ -40,7 +40,7 @@ DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
     'localhost',
-    'https://techstables-2157aa5076c9.herokuapp.com']
+    'techstables-2157aa5076c9.herokuapp.com']
 
 
 # Application definition
