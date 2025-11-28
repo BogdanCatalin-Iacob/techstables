@@ -1,10 +1,18 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
+from rest_framework.test import APITestCase
 from ..models import Profile
 import time
 
-def test_auto_created_profile_on_user_creation(self):
-    pass
+
+class ProfileModelTests(APITestCase):
+    def test_auto_created_profile_on_user_creation(self):
+        user = User.objects.create_user(username='testuser', password='testpass')
+        # The signal should create profile automatically
+        profile = Profile.objects.get(owner=user)
+        self.assertIsNotNone(profile)
+        self.assertEqual(profile.owner, user)
+
 
 def test_no_duplicate_profiles_on_user_update(self):
     pass
