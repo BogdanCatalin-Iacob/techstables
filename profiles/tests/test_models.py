@@ -13,9 +13,12 @@ class ProfileModelTests(APITestCase):
         self.assertIsNotNone(profile)
         self.assertEqual(profile.owner, user)
 
-
-def test_no_duplicate_profiles_on_user_update(self):
-    pass
+    def test_no_duplicate_profiles_on_user_update(self):
+        user = User.objects.create_user(username='testuser2', password='testpass')
+        # Saving user again should not create another profile
+        user.first_name = 'Bogdan'
+        user.save()
+        self.assertEqual(Profile.objects.filter(owner=user).count(), 1)
 
 def test_profile_deletion_on_user_deletion(self):
     pass
