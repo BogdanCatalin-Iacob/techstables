@@ -25,11 +25,11 @@ class ProfileModelTests(APITestCase):
         profile = Profile.objects.get(owner=user)
         self.assertEqual(str(profile), f'{user}\'s profile')
 
-def test_str_representation_of_profile(self):
-    pass
-
-def test_default_image_upload(self):
-    pass
+    def test_default_image_upload(self):
+        user = User.objects.create_user(username='testuser4', password='testpass')
+        profile = Profile.objects.get(owner=user)
+        # Default image should be set to the configured default path
+        self.assertEqual(profile.image.name, '../default_profile_xdfle7')
 
 def test_ordering_by_profile_desc(self):
     pass
