@@ -20,8 +20,10 @@ class ProfileModelTests(APITestCase):
         user.save()
         self.assertEqual(Profile.objects.filter(owner=user).count(), 1)
 
-def test_profile_deletion_on_user_deletion(self):
-    pass
+    def test_str_representation(self):
+        user = User.objects.create_user(username='testuser3', password='testpass')
+        profile = Profile.objects.get(owner=user)
+        self.assertEqual(str(profile), f'{user}\'s profile')
 
 def test_str_representation_of_profile(self):
     pass
