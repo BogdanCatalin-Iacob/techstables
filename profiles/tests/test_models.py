@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
+from django.db import IntegrityError, transaction
 from rest_framework.test import APITestCase
 from ..models import Profile
 import time
@@ -55,10 +56,17 @@ class ProfileModelTests(APITestCase):
         self.assertGreater(profile.updated_at, original_updated)
 
     def test_deleting_user_deletes_profile(self):
-        user = User.objects.create_user(username='testuser6', password='testpass')
+        user = User.objects.create_user(
+            username='testuser6', password='testpass')
         self.assertTrue(Profile.objects.filter(owner=user).exists())
         user.delete()
-        self.assertFalse(Profile.objects.filter(owner=user).exists())
+        self.assertFalse(
+            Profile.objects.filter(owner__username='testuser6').exists())
 
-def test_cannot_create_profile_for_the_same_user_twice(self):
-    pass
+    def test_cannot_create_profile_for_the_same_user_twice(self):
+        user = User.objects.create_user(
+            username='testuser7', password='testpass')
+
+        with self.assertRaises(IntegrityError):
+            with transaction.atomic():
+                Profile.objects.create(owner=user)
