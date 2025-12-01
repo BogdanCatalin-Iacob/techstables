@@ -54,8 +54,11 @@ class ProfileModelTests(APITestCase):
 
         self.assertGreater(profile.updated_at, original_updated)
 
-def test_delete_user_deletes_profile(self):
-    pass
+    def test_deleting_user_deletes_profile(self):
+        user = User.objects.create_user(username='testuser6', password='testpass')
+        self.assertTrue(Profile.objects.filter(owner=user).exists())
+        user.delete()
+        self.assertFalse(Profile.objects.filter(owner=user).exists())
 
 def test_cannot_create_profile_for_the_same_user_twice(self):
     pass
