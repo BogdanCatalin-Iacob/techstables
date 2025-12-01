@@ -40,8 +40,19 @@ class ProfileModelTests(APITestCase):
         self.assertEqual(profiles[0].owner, user2)
         self.assertEqual(profiles[1].owner, user1)
 
-def test_updated_change_on_save(self):
-    pass
+    def test_updated_changes_on_save(self):
+        user = User.objects.create_user(username='testuser5', password='testpass')
+        profile = Profile.objects.get(owner=user)
+        original_updated = profile.updated_at
+
+        # Ensure timestamp will differ
+        time.sleep(0.01)
+
+        profile.name = 'New Name'
+        profile.save()
+        profile.refresh_from_db()
+
+        self.assertGreater(profile.updated_at, original_updated)
 
 def test_delete_user_deletes_profile(self):
     pass
