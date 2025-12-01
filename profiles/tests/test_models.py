@@ -31,8 +31,14 @@ class ProfileModelTests(APITestCase):
         # Default image should be set to the configured default path
         self.assertEqual(profile.image.name, '../default_profile_xdfle7')
 
-def test_ordering_by_profile_desc(self):
-    pass
+    def test_ordering_by_profile_desc(self):
+        user1 = User.objects.create_user(username='user1', password='pass')
+        time.sleep(0.01)  # Ensure created_at differs
+        user2 = User.objects.create_user(username='user2', password='pass')
+
+        profiles = list(Profile.objects.all())  # Meta ordering is ['-created_at']
+        self.assertEqual(profiles[0].owner, user2)
+        self.assertEqual(profiles[1].owner, user1)
 
 def test_updated_change_on_save(self):
     pass
