@@ -29,3 +29,12 @@ class PostListTests(APITestCase):
         payload = {"title": "Gamma", "content": "c"}
         resp = self.client.post(self.list_url, payload)
         self.assertEqual(resp.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_authenticated_user_can_create_post_owner_set(self):
+        self.client.login(username="alice", password="pass1234")
+        payload = {"title": "Gamma", "content": "c"}
+        resp = self.client.post(self.list_url, payload, format="json")
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(resp.data["owner"], "alice")
+        self.assertEqual(Post.objects.count(), 3)
+        self.assertTrue(Post.objects.filter(title="Gamma", owner=self.user1).exists())
