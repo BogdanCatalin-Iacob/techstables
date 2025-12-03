@@ -24,3 +24,8 @@ class PostListTests(APITestCase):
         # ensure results returned and ordering by -created_at (newest first)
         ids = [item["id"] for item in resp.data["results"]] if isinstance(resp.data, dict) and "results" in resp.data else [item["id"] for item in resp.data]
         self.assertEqual(ids, [self.p2.id, self.p1.id])
+
+    def test_create_requires_authentication(self):
+        payload = {"title": "Gamma", "content": "c"}
+        resp = self.client.post(self.list_url, payload)
+        self.assertEqual(resp.status_code, status.HTTP_403_FORBIDDEN)
