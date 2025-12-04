@@ -38,3 +38,11 @@ class PostListTests(APITestCase):
         self.assertEqual(resp.data["owner"], "alice")
         self.assertEqual(Post.objects.count(), 3)
         self.assertTrue(Post.objects.filter(title="Gamma", owner=self.user1).exists())
+
+    def test_search_by_title(self):
+        resp = self.client.get(self.list_url, {"search": "Alpha"})
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        items = resp.data["results"] if isinstance(resp.data, dict) and "results" in resp.data else resp.data
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["title"], "Alpha")
+
