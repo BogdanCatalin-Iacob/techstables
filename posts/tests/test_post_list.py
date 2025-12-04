@@ -46,3 +46,7 @@ class PostListTests(APITestCase):
         self.assertEqual(len(items), 1)
         self.assertEqual(items[0]["title"], "Alpha")
 
+    def test_ordering_by_likes_count_field_is_accepted(self):
+        # Ensure that the view accepts ordering fields defined
+        resp = self.client.get(self.list_url, {"ordering": "likes__count"})
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
