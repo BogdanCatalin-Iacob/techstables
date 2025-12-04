@@ -50,3 +50,10 @@ class PostListTests(APITestCase):
         # Ensure that the view accepts ordering fields defined
         resp = self.client.get(self.list_url, {"ordering": "likes__count"})
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
+
+    def test_unique_title_validation(self):
+        self.client.login(username="bob", password="pass1234")
+        # Duplicate title should fail because Post.title is unique
+        resp = self.client.post(self.list_url, {"title": "Alpha", "content": "dup"}, format="json")
+        self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("title", resp.data)
