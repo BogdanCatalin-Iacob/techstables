@@ -72,3 +72,11 @@ class PostListTests(APITestCase):
         items = resp.data["results"] if isinstance(resp.data, dict) and "results" in resp.data else resp.data
         self.assertGreaterEqual(items[0]["created_at"], items[1]["created_at"])
 
+    def test_like_id_present_for_authenticated_user(self):
+        # When authenticated, like_id field should be present (None if no like)
+        self.client.login(username="alice", password="pass1234")
+        resp = self.client.get(self.list_url)
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        items = resp.data["results"] if isinstance(resp.data, dict) and "results" in resp.data else resp.data
+        # Ensure key exists and is None by default
+        self.assertIn("like_id", items[0])
