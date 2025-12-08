@@ -57,3 +57,11 @@ class PostListTests(APITestCase):
         resp = self.client.post(self.list_url, {"title": "Alpha", "content": "dup"}, format="json")
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn("title", resp.data)
+
+    def test_search_by_owner_username(self):
+        resp = self.client.get(self.list_url, {"search": "bob"})
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        items = resp.data["results"] if isinstance(resp.data, dict) and "results" in resp.data else resp.data
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["owner"], "bob")
+
