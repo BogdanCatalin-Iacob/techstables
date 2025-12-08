@@ -85,3 +85,10 @@ class PostListTests(APITestCase):
         # filterset supports owner__profile
         resp = self.client.get(self.list_url, {"owner__profile": self.user1.profile.id})
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
+
+    def test_authenticated_creation_sets_is_owner_true(self):
+        self.client.login(username="bob", password="pass1234")
+        payload = {"title": "Delta", "content": "d"}
+        resp = self.client.post(self.list_url, payload, format="json")
+        self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(resp.data["is_owner"])
