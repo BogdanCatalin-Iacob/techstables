@@ -80,3 +80,8 @@ class PostListTests(APITestCase):
         items = resp.data["results"] if isinstance(resp.data, dict) and "results" in resp.data else resp.data
         # Ensure key exists and is None by default
         self.assertIn("like_id", items[0])
+
+    def test_filter_by_owner_profile(self):
+        # filterset supports owner__profile
+        resp = self.client.get(self.list_url, {"owner__profile": self.user1.profile.id})
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
