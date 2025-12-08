@@ -65,3 +65,10 @@ class PostListTests(APITestCase):
         self.assertEqual(len(items), 1)
         self.assertEqual(items[0]["owner"], "bob")
 
+    def test_ordering_by_created_at_desc_default(self):
+        # default queryset ordering is -created_at
+        resp = self.client.get(self.list_url)
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
+        items = resp.data["results"] if isinstance(resp.data, dict) and "results" in resp.data else resp.data
+        self.assertGreaterEqual(items[0]["created_at"], items[1]["created_at"])
+
