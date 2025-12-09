@@ -6,6 +6,7 @@
     -   [Api overview](#api-overview)
     -   [Base URL](#base-url)
     -   [Endpoints](#endpoints)
+        -   [Login / Register](#login--registration-endpoints)
         -   [Profiles](#profiles)
             -   [Profiles Endpoints](#profiles-endpoints)
             -   [Profiles Response example](#profiles-response-example)
@@ -91,6 +92,14 @@ This API powers the Techstables app, enablig users to:
 -   https://techstables-2157aa5076c9.herokuapp.com
 
 * ### Endpoints
+    - #### Login / registration endpoints
+        Login: `POST` `/dj-rest-auth/login`
+        Logout: `POST` `/dj-rest-auth/logout`
+        Registration: `POST` `/dj-rest-auth/registration`
+        User detail: `GET` `/dj-rest-auth/user`
+        Token refresh: `POST` ``/dj-rest-auth/token/refresh`
+
+
     - #### Profiles
         - ##### Profiles Endpoints
         Retrieve all profiles: `GET` `/profiles` <br>
