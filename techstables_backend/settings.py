@@ -116,7 +116,8 @@ MIDDLEWARE = [
 #     CORS_ALLOWED_ORIGINS = [
 #         os.environ.get('CLIENT_ORIGIN')
 #     ]
-CORS_ALLOWED_ORIGINS = ['*']
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_WHITELIST = 'http://localhost:5173'
 
 CORS_ALLOW_CREDENTIALS = True
 
